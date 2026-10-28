@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dual-delta-net"
+version = "0.1.0"
+description = "Dual DeltaNet: Value-Side Memory Reorganization for Linear Attention"
+authors = [{name = "Yixiao Qian", email = "yixiaoqian@zju.edu.cn"}]
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+dependencies = [
+    "transformers>=4.45.0,<6",
+    "einops",
+    "torch>=2.7.0",
+    "triton>=3.3",
+    "tilelang==0.1.12",
+    "torchdata>=0.11.0",
+    "datasets>=3.3.0,<4",
+    "numpy",
+    "pyarrow",
+    "psutil",
+    "tomli; python_version<'3.11'",
+    "ninja",
+    "tiktoken",
+    "tensorboard",
+    "sentencepiece",
+    # Flame imports TorchTitan 0.1 APIs, including torchtitan.config_manager.
+    "torchtitan==0.1.0",
+    "tyro>=1.0",
+]
+
+[project.optional-dependencies]
+conv1d = ["causal-conv1d>=1.4.0"]
+wandb = ["wandb"]
+
+[tool.setuptools]
+license-files = ["LICENSE", "fla/LICENSE", "flame/LICENSE"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fla", "fla.*", "flame", "flame.*"]
+namespaces = false
